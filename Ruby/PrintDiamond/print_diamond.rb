@@ -21,7 +21,7 @@ def puts_diamond_from_letter(letter)
   d = distance_between_letters('A', letter)
 
   get_diamond_loop_indicies('A', letter).each do |i|
-    current_letter = get_letter_from_offset('A', i)
+    current_letter = get_letter_from_offset('A', d-i)
     line = get_space_padding(i) + current_letter
     ending = d != i ? get_space_padding(d-(i-1)*2)+current_letter : ""
     puts line + ending
