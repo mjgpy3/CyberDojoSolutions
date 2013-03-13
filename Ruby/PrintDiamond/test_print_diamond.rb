@@ -35,4 +35,9 @@ class TestPrintDiamond < Test::Unit::TestCase
     assert_equal get_letter_from_offset('A', 2), 'C'
   end
 
+  def test_one
+    puts "\n"
+    puts_diamond_from_letter('D')
+  end
+
 end
