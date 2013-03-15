@@ -1,4 +1,4 @@
-var calcStats = {
+calcStats = {
   valueByCondition: function(nums, condition) {
     var min = nums[0];
 
@@ -27,21 +27,3 @@ var calcStats = {
     return sum/this.numberOfElements(nums);
   }
 };
-
-// The following functions are for testing only
-
-answerMin = function(nums) {
-  return calcStats.minValue(nums);
-}
-
-answerMax = function(nums) {
-  return calcStats.maxValue(nums);
-}
-
-answerNElements = function(nums) {
-  return calcStats.numberOfElements(nums);
-}
-
-answerAverage = function(nums) {
-  return calcStats.average(nums);
-}
