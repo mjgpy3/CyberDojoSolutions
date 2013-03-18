@@ -14,12 +14,10 @@ class LcdDigits
 
         for (int i = 0; i < digits.Length; i++)
         {
-            firstLine += GetFirstLine(digits[i]) +
-                        (i != digits.Length-1 ? " " : "");
-            secondLine += GetSecondLine(digits[i]) +
-                        (i != digits.Length-1 ? " " : "");
-            thirdLine += GetThirdLine(digits[i]) +
-                        (i != digits.Length-1 ? " " : "");
+            string end = (i != digits.Length-1 ? " " : "");
+            firstLine += GetFirstLine(digits[i]) + end;
+            secondLine += GetSecondLine(digits[i]) + end;
+            thirdLine += GetThirdLine(digits[i]) + end;
         }
  
         result += firstLine + "\n";
