@@ -37,7 +37,7 @@ public class OneHundredDoors
     {
         string result = "";
 
-        for (int i = 0; i+1 < size; i++)
+        for (int i = 0; i < size; i++)
         {
             result += _doors[i] + "\n";
         }
