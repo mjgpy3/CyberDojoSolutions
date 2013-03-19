@@ -1,7 +1,23 @@
 using System;
+using System.Collections.Generic;
 
 static class PrimeFactors
 {
+    public static int [] Get(int n)
+    {
+        List<int> primeFactors = new List<int>();
+
+        for (int i = 2; n > 1; i++)
+        {
+            while (n%i == 0 && n > 1 && IsPrime(i))
+            {
+                primeFactors.Add(i);
+                n /= i;
+            }
+        }
+        return primeFactors.ToArray();
+    }
+
     public static bool IsPrime(int n)
     {
         if (n <= 3)
