@@ -63,7 +63,7 @@ class PrimeFactorsTest
     public void ThreeAndFiveAreThePrimeFactorsOfFifteen()
     {
         int [] actual = PrimeFactors.Get(15);
-        int [] expected = new int[] {3, 5};
+        int [] expected = new int[] { 3, 5 };
 
         Assert.AreEqual(expected, actual);
     }
