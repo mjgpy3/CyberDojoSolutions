@@ -1,4 +1,4 @@
-ing NUnit.Framework;
+using NUnit.Framework;
 
 [TestFixture]
 class FizzBuzzTest
