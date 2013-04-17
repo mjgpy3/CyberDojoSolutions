@@ -5,6 +5,18 @@ game = {
   width: null
 };
 
+calculateNext = function() {
+  var i, j;
+
+  game.nextBoard = game.board;
+
+  for (i = 0; i < game.height; i += 1) {
+    for (j = 0; j < game.width; j += 1) {
+      game.nextBoard = cellLives(i, j);
+    }
+  }
+}
+
 getNumAround = function(i, j) {
   // Assume i and j are in the index range
   var numAround = (game.board[i][j]? -1 : 0),
@@ -24,6 +36,17 @@ getNumAround = function(i, j) {
 
 validIndex = function(i, j) {
   return i >= 0 && i < game.height && j >= 0 && j < game.width;
+}
+
+cellLives = function(isAlive, numNeighbors) {
+  if ((isAlive && (numNeighbors == 2 || numNeighbors == 3))) {
+    return true;
+  }
+  if (!isAlive && numNeighbors == 3) {
+    return true;
+  }
+
+  return false;
 }
 
 fillBoard = function(input_string) {
