@@ -5,7 +5,26 @@ game = {
   width: null
 };
 
+getNumAround = function(i, j) {
+  // Assume i and j are in the index range
+  var numAround = (game.board[i][j]? -1 : 0),
+      di, dj;
 
+  for (di = i-1; di <= i+1; di += 1) {
+    for (dj = j-1; dj <= j+1; dj += 1) {
+      if (validIndex(di, dj)) {
+        if (game.board[di][dj]) {
+          numAround += 1;
+        }
+      }
+    }
+  }
+  return numAround;
+}
+
+validIndex = function(i, j) {
+  return i >= 0 && i < game.height && j >= 0 && j < game.width;
+}
 
 fillBoard = function(input_string) {
   var lines = input_string.split("\n"),

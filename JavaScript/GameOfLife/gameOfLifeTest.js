@@ -16,4 +16,6 @@ for (var i = 0; i < game.board.height; i += 1) {
   }
 }
 
+assert.equal(2, getNumAround(1, 4));
+
 console.log("All Game of Life tests passed");
