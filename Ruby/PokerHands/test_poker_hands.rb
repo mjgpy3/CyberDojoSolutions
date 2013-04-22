@@ -111,7 +111,6 @@ class TestPokerHands < Test::Unit::TestCase
     hand
   end
 
-
   def test_classify_can_recognize_three_of_a_kind
     hand = Hand.new
 
@@ -123,6 +122,38 @@ class TestPokerHands < Test::Unit::TestCase
 
     answer = classify hand
     expected = Hands::ThreeOfAKind
+
+    assert_equal expected, answer
+    hand
+  end
+
+  def test_classify_can_recognize_two_pairs
+    hand = Hand.new
+
+    [2,2,5,5].each do |value|
+      hand.cards << Card.new(value.to_s, 'C')
+    end
+
+    hand.cards << Card.new("7", 'D')
+
+    answer = classify hand
+    expected = Hands::TwoPairs
+
+    assert_equal expected, answer
+    hand
+  end
+
+  def test_classify_can_recognize_a_pair
+    hand = Hand.new
+
+    [2,2,3,5].each do |value|
+      hand.cards << Card.new(value.to_s, 'C')
+    end
+
+    hand.cards << Card.new("7", 'D')
+
+    answer = classify hand
+    expected = Hands::Pair
 
     assert_equal expected, answer
     hand

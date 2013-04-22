@@ -35,6 +35,10 @@ def classify hand
   elsif values.count(values[0]) == 3 || values.count(values[1]) == 3 ||
         values.count(values[2]) == 3
     return Hands::ThreeOfAKind
+  elsif number_of_values == 3
+    return Hands::TwoPairs
+  elsif number_of_values < 5
+    return Hands::Pair
   end
 
   # If nothing else works...
