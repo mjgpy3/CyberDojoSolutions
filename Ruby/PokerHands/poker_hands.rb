@@ -26,6 +26,8 @@ def classify hand
     return Hands::StraightFlush
   elsif values.count(values[0]) == 4 || values.count(values[1]) == 4
     return Hands::FourOfAKind
+  elsif number_of_values == 2
+    return Hands::FullHouse
   elsif has_flush_property
     return Hands::Flush
   elsif has_straight_property
