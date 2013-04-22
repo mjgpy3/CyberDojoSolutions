@@ -11,14 +11,12 @@ end
 class Deck
   def initialize
     @cards = []
-    @count = 0
     build_standard_deck
   end
 
   def build_standard_deck
     (0..12).each do |v|
       (0..3).each do |s|
-        @count += 1
         @cards << Card.new(v, s)
       end
     end
@@ -29,7 +27,6 @@ class Deck
 
     (1..n).each do 
       to_deal << @cards.pop
-      @count -= 1
     end
 
     to_deal
@@ -40,7 +37,7 @@ class Deck
   end
 
   def count
-    @count
+    @cards.count
   end
 end
 
