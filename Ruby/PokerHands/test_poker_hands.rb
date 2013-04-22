@@ -94,4 +94,37 @@ class TestPokerHands < Test::Unit::TestCase
     assert_equal expected, answer
     hand
   end
+
+  def test_classify_can_recognize_a_high_card
+    hand = Hand.new
+
+    [2,4,5,6].each do |value|
+      hand.cards << Card.new(value.to_s, 'C')
+    end
+
+    hand.cards << Card.new("7", 'D')
+
+    answer = classify hand
+    expected = Hands::HighCard
+
+    assert_equal expected, answer
+    hand
+  end
+
+
+  def test_classify_can_recognize_three_of_a_kind
+    hand = Hand.new
+
+    [2,4,5,5].each do |value|
+      hand.cards << Card.new(value.to_s, 'C')
+    end
+
+    hand.cards << Card.new("5", 'D')
+
+    answer = classify hand
+    expected = Hands::ThreeOfAKind
+
+    assert_equal expected, answer
+    hand
+  end
 end

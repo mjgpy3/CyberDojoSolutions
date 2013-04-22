@@ -32,6 +32,9 @@ def classify hand
     return Hands::Flush
   elsif has_straight_property
     return Hands::Straight
+  elsif values.count(values[0]) == 3 || values.count(values[1]) == 3 ||
+        values.count(values[2]) == 3
+    return Hands::ThreeOfAKind
   end
 
   # If nothing else works...
