@@ -158,4 +158,106 @@ class TestPokerHands < Test::Unit::TestCase
     assert_equal expected, answer
     hand
   end
+
+  def test_white_wins_example_game_1
+    # Input: Black: 2H 3D 5S 9C KD White: 2C 3H 4S 8C AH
+    black = Hand.new
+    white = Hand.new
+
+    "2H 3D 5S 9C KD".split(' ').each do |c|
+      black.cards << Card.new(c[0], c[1])
+    end
+
+    "2C 3H 4S 8C AH".split(' ').each do |c|
+      white.cards << Card.new(c[0], c[1])
+    end
+
+    answer = get_name_of_winner black, white
+    expected = "white"
+
+    assert_equal expected, answer
+
+  end
+
+  def test_black_wins_example_game_2
+    # Black: 2H 4S 4C 2D 4H White: 2S 8S AS QS 3S
+    black = Hand.new
+    white = Hand.new
+
+    "2H 4S 4C 2D 4H".split(' ').each do |c|
+      black.cards << Card.new(c[0], c[1])
+    end
+
+    "2S 8S AS QS 3S".split(' ').each do |c|
+      white.cards << Card.new(c[0], c[1])
+    end
+
+    answer = get_name_of_winner black, white
+    expected = "black"
+
+    assert_equal expected, answer
+
+  end
+
+  def test_example_game_3_is_a_tie
+    # Black: 2H 3D 5S 9C KD White: 2C 3H 4S 8C KH
+    black = Hand.new
+    white = Hand.new
+
+    "2H 3D 5S 9C KD".split(' ').each do |c|
+      black.cards << Card.new(c[0], c[1])
+    end
+
+    "2C 3H 4S 8C KH".split(' ').each do |c|
+      white.cards << Card.new(c[0], c[1])
+    end
+
+    answer = get_name_of_winner black, white
+    expected = "tie"
+
+    assert_equal expected, answer
+
+  end
+
+  def test_example_game_4_is_a_tie
+    # Black: 2H 3D 5S 9C KD White: 2D 3H 5C 9S KH
+    black = Hand.new
+    white = Hand.new
+
+    "2H 3D 5S 9C KD".split(' ').each do |c|
+      black.cards << Card.new(c[0], c[1])
+    end
+
+    "2D 3H 5C 9S KH".split(' ').each do |c|
+      white.cards << Card.new(c[0], c[1])
+    end
+
+    answer = get_name_of_winner black, white
+    expected = "tie"
+
+    assert_equal expected, answer
+
+  end
+
+  def get_name_of_winner hand_1, hand_2
+    blacks_hand = classify hand_1
+    whites_hand = classify hand_2
+
+    blacks_values = (hand_1.cards.collect {|x| x.value}).to_a
+    whites_values = (hand_2.cards.collect {|x| x.value}).to_a
+
+    if blacks_hand > whites_hand
+      return "black"
+    elsif whites_hand > blacks_hand
+      return "white"
+    else
+      if whites_values.max > blacks_values.max
+        return "white"
+      elsif whites_values.max < blacks_values.max
+        return "black"
+      end
+    end
+
+    return "tie"
+  end
 end
