@@ -1,3 +1,36 @@
+require 'set'
+
+module Hands
+  HighCard = 1
+  Pair = 2
+  TwoPairs = 3
+  ThreeOfAKind = 4
+  Straight = 5
+  Flush = 6
+  FullHouse = 7
+  FourOfAKind = 8
+  StraightFlush = 9
+end
+
+def classify hand
+  values = hand.cards.collect {|card| card.value}
+  suits = hand.cards.collect {|card| card.suit}
+  has_flush_property = Set.new(suits).size == 1
+  has_straight_property = values.sort == (values.min..values.max).to_a
+
+  if has_flush_property && has_straight_property
+    return Hands::StraightFlush
+  elsif has_flush_property
+    return Hands::Flush
+  elsif has_straight_property
+    return Hands::Straight
+  end
+
+  # If nothing else works...
+  Hands::HighCard
+
+end
+
 class Hand
   def initialize
     @cards = []
@@ -6,6 +39,11 @@ class Hand
   def set_hand cards
     @cards = cards
   end
+
+  def cards
+    @cards
+  end
+
 end
 
 class Deck
@@ -54,5 +92,13 @@ class Card
   def initialize value, suit
     @value = @@value_to_num[value]
     @suit = @@suit_to_num[suit]
+  end
+
+  def value
+    @value
+  end
+
+  def suit
+    @suit
   end
 end

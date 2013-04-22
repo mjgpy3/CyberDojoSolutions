@@ -23,4 +23,47 @@ class TestPokerHands < Test::Unit::TestCase
 
     assert_equal 47, deck.count
   end
+
+  def test_classify_can_recognize_a_straight 
+    hand = Hand.new
+
+    (2..5).each do |value|
+      hand.cards << Card.new(value.to_s, 'C')
+    end
+    hand.cards << Card.new("6", 'D')
+
+    answer = classify hand
+    expected = Hands::Straight
+
+    assert_equal expected, answer
+    hand
+  end
+
+  def test_classify_can_recognize_a_straight_flush
+    hand = Hand.new
+
+    (2..6).each do |value|
+      hand.cards << Card.new(value.to_s, 'C')
+    end
+
+    answer = classify hand
+    expected = Hands::StraightFlush
+
+    assert_equal expected, answer
+    hand
+  end
+
+  def test_classify_can_recognize_a_flush
+    hand = Hand.new
+
+    [4,5,2,2,8].each do |value|
+      hand.cards << Card.new(value.to_s, 'C')
+    end
+
+    answer = classify hand
+    expected = Hands::Flush
+
+    assert_equal expected, answer
+    hand
+  end
 end
