@@ -66,4 +66,18 @@ class TestPokerHands < Test::Unit::TestCase
     assert_equal expected, answer
     hand
   end
+
+  def test_classify_can_recognize_four_of_a_kind
+    hand = Hand.new
+
+    [4,4,4,4, 5].each do |value|
+      hand.cards << Card.new(value.to_s, 'C')
+    end
+
+    answer = classify hand
+    expected = Hands::FourOfAKind
+
+    assert_equal expected, answer
+    hand
+  end
 end

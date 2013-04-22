@@ -15,11 +15,17 @@ end
 def classify hand
   values = hand.cards.collect {|card| card.value}
   suits = hand.cards.collect {|card| card.suit}
-  has_flush_property = Set.new(suits).size == 1
+
+  number_of_faces = Set.new(suits).size
+  number_of_values = Set.new(values).size
+
+  has_flush_property = number_of_faces == 1
   has_straight_property = values.sort == (values.min..values.max).to_a
 
   if has_flush_property && has_straight_property
     return Hands::StraightFlush
+  elsif values.count(values[0]) == 4 || values.count(values[1]) == 4
+    return Hands::FourOfAKind
   elsif has_flush_property
     return Hands::Flush
   elsif has_straight_property
